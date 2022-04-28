@@ -7,8 +7,8 @@ import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+// import Visibility from '@mui/icons-material/Visibility';
+// import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
@@ -104,7 +104,7 @@ function Login() {
                       onClick={handleClickShowPassword}
                       onMouseDown={(e) => {e.preventDefault()}}
                     >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {values.showPassword ? <span className="material-icons">visibility_off</span> : <span className="material-icons">visibility</span>}
                     </IconButton>
                   </InputAdornment>
                 }

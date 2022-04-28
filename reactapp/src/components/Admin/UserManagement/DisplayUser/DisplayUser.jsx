@@ -11,15 +11,17 @@ import Paper from '@mui/material/Paper';
 import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
+import 'material-icons/iconfont/material-icons.css';
+// import FirstPageIcon from '@mui/icons-material/FirstPage';
+// import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+// import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+// import LastPageIcon from '@mui/icons-material/LastPage';
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import EditIcon from '@mui/icons-material/Edit';
+// import PersonIcon from '@mui/icons-material/Person';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -27,7 +29,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import PersonIcon from '@mui/icons-material/Person';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -63,28 +64,28 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === 'rtl' ? <span className="material-icons">last_page</span> : <span className="material-icons">first_page</span>}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === 'rtl' ? <span className="material-icons">keyboard_arrow_right</span> : <span className="material-icons">keyboard_arrow_left</span>}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === 'rtl' ? <span className="material-icons">keyboard_arrow_left</span> : <span className="material-icons">keyboard_arrow_right</span>}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === 'rtl' ? <span className="material-icons">first_page</span> : <span className="material-icons">last_page</span>}
       </IconButton>
     </Box>
   );
@@ -157,7 +158,7 @@ function DisplayUser() {
       <Header highlight={"Users"}/>
       <div className="DisplayUser-Nav">
         <Avatar sx={{width: 30, height: 30, marginRight: '8px'}}>
-          <PersonIcon/>
+          <span className="material-icons">person</span>
         </Avatar>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
           {breadcrumbs}
@@ -195,12 +196,14 @@ function DisplayUser() {
                 </TableCell>
                 <TableCell style={{ width: 50 }} align="right">
                   <IconButton aria-label="edit" onClick={() => handleEditUser(row)}>
-                    <EditIcon sx={{fontSize: '20px'}} />
+                    {/* <EditIcon sx={{fontSize: '20px'}} /> */}
+                    <span className="material-icons">edit</span>
                   </IconButton>
                 </TableCell>
                 <TableCell style={{ width: 50 }} align="right">
                   <IconButton aria-label="delete" color="error" onClick={handleClickOpen}>
-                    <DeleteIcon sx={{fontSize: '20px'}}/>
+                    {/* <DeleteIcon sx={{fontSize: '20px'}}/> */}
+                    <span className="material-icons">delete</span>
                   </IconButton>
                 </TableCell>
               </TableRow>

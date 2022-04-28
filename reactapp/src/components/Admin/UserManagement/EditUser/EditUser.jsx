@@ -3,7 +3,7 @@ import './EditUser.css'
 import Header from '../../../Header/Header'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
-import PersonIcon from '@mui/icons-material/Person';
+// import PersonIcon from '@mui/icons-material/Person';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -50,7 +50,7 @@ function EditUser() {
         <Header highlight="Users"/>
         <div className="EditUser-Nav">
           <Avatar sx={{width: 30, height: 30, marginRight: '8px'}}>
-            <PersonIcon/>
+            <span className="material-icons">person</span>
           </Avatar>
           <Breadcrumbs separator="›" aria-label="breadcrumb">
             {breadcrumbs}

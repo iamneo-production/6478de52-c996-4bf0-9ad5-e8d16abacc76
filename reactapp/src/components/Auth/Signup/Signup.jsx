@@ -3,10 +3,10 @@ import './Signup.css'
 import { useStateValue } from "../../../functions/Utils/StateProvider";
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { validateFields } from '../../../functions/Auth/Signup';
