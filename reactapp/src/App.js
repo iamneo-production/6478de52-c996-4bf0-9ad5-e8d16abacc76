@@ -8,6 +8,8 @@ import Signup from './components/Auth/Signup/Signup';
 import Login from './components/Auth/Login/Login';
 import DisplayUser from './components/Admin/UserManagement/DisplayUser/DisplayUser';
 import EditUser from './components/Admin/UserManagement/EditUser/EditUser';
+import AddVenue from './components/Admin/VenueManagement/AddVenue/AddVenue';
+import ViewVenue from './components/Admin/VenueManagement/ViewVenue/ViewVenue';
 
 
 function App() {
@@ -67,6 +69,8 @@ function App() {
                 <Routes>
                   <Route exact path = "/admin/displayUsers" element={<DisplayUser />}/>
                   <Route exact path = "/admin/editUser" element={<EditUser />}/>
+                  <Route exact path = "/admin/addVenue" element={<AddVenue/>}/>
+                  <Route exact path = "/admin/viewVenue" element={<ViewVenue/>}/>
                   <Route exact path = "/admin" element={<Navigate replace to="/admin/displayUsers"/>}/>
                 </Routes>
               </>
