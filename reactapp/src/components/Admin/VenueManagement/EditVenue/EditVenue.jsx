@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./EditVenue.css"
+import "./EditVenue.css";
 export default class EditVenue extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +13,7 @@ export default class EditVenue extends Component {
       venueDataarr: [],
     }
   }
+  
   componentDidMount() {
     var m = JSON.parse(localStorage.getItem("venue"));
     var k;
@@ -52,6 +53,11 @@ export default class EditVenue extends Component {
     });
   }
   onEditVenue = () => {
+    if(this.state.venueName===''|| this.state.venueImageUrl==='' || this.state.venueDescription===''|| this.state.venueCapacity===''|| this.state.venueLocation==='')
+    {
+      alert("please fill the required inputs");
+    }
+    else{
     var m = JSON.parse(localStorage.getItem("venue"));
     console.log(m[0].venueId === this.props.keyId)
     for (var i = 0; i < m.length; i++) {
@@ -66,7 +72,9 @@ export default class EditVenue extends Component {
     localStorage.setItem("venue",JSON.stringify(m));
     alert("changed");
   }
+  }
   render() {
+   
     return (
 
       <div className="outer">

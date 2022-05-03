@@ -39,7 +39,13 @@ export default class AddVenue extends Component {
     this.setState({venueDataarr:u});
     console.log(u);
   }
+
   onAddVenue=()=>{
+    if(this.state.venueName===''|| this.state.venueImageUrl==='' || this.state.venueDescription===''|| this.state.venueCapacity===''|| this.state.venueLocation==='')
+    {
+      alert("please fill the required inputs");
+    }
+    else{
     console.log(this.state);
     var q={
       venueId: 'id' + Math.random().toString(36).substr(2, 9),
@@ -51,6 +57,7 @@ export default class AddVenue extends Component {
     };
     console.log(q);
     this.setState({venueDataarr:q,venueId: '',venueName: '',venueImageUrl: '',venueDescription: '',venueLocation: '',venueCapacity: ''},()=>{this.afterupdate()});
+  }
   }
   afterupdate()
   { var t=localStorage.getItem("venue");

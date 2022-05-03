@@ -10,6 +10,7 @@ import DisplayUser from './components/Admin/UserManagement/DisplayUser/DisplayUs
 import EditUser from './components/Admin/UserManagement/EditUser/EditUser';
 import AddVenue from './components/Admin/VenueManagement/AddVenue/AddVenue';
 import ViewVenue from './components/Admin/VenueManagement/ViewVenue/ViewVenue';
+import EditVenue from './components/Admin/VenueManagement/EditVenue/EditVenue';
 
 
 function App() {
@@ -53,7 +54,7 @@ function App() {
             <Route exact path = "/user/signup" element={<Signup/>}/>
             <Route exact path="/user/login" element={<Login/>}/>
             <Route exact path="/" element={<Navigate replace to="/user/login"/>}/>
-            <Route exact path="/login" element={<Navigate replace to="/user/login"/>}/>
+            <Route exact path="/login" element={<Navigate replace to="/user/login"/>} />
             <Route exact path="/admin/login" element={<Navigate replace to="/user/login"/>}/>
           </Routes>
         ):(

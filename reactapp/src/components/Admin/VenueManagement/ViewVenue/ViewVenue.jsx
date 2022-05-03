@@ -193,12 +193,12 @@ class ViewVenue extends Component {
               xxl: 2,
             }}
             dataSource={this.state.venuedataarr}
-            renderItem={item => (
-              <List.Item style={{ padding: "20px" }} key={item.venueId}>
+            renderItem={(item,index) => (
+              <List.Item style={{ padding: "20px" }} key={item.venueId} id={"adminVenueGrid"+(index+1)}>
                 <Card style={{ width: 350, borderRadius: "10px", border: "none"/* background: "rgba(0,0,0,0.4)"*/ }} hoverable cover={<img style={{ width: 350, height: 200, objectFit: "contain" }} alt="example" src={item.venueImageUrl} />}
                   actions={[
-                    <EditOutlined key="edit" /*style={{ color: "white" }}*/ onClick={() => this.openModal(item.venueId)} />,
-                    <DeleteOutlined key="delete" /*style={{ color: "white" }}*/ onClick={() => this.deleteVenue(item.venueId)} />]}>
+                    <EditOutlined key="edit" id="editVenue" onClick={() => this.openModal(item.venueId)} />,
+                    <DeleteOutlined key="delete" id="deleteVenue" onClick={() => this.deleteVenue(item.venueId)} />]}>
                   <Meta title={<Text /*className='text-light'*/>{item.venueName}</Text>} description={<div className='d-flex justify-content-between'><Text /*className='text-light'*/>Place:&nbsp;{item.venueLocation}</Text><Rate disabled defaultValue={2} /></div>} />
                 </Card>
               </List.Item>
