@@ -137,7 +137,7 @@ class ViewVenue extends Component {
   searchbyname = () => {
     this.resetdata();
     this.backuparr = this.state.venuedataarr;
-    var k = this.venuedata;
+    var k = this.state.venuedataarr;
     var q = k.filter((el) => {
       console.log(el.venueName.toLowerCase().includes(this.state.search.toLowerCase()))
       return el.venueName.toLowerCase().includes(this.state.search.toLowerCase())
@@ -147,7 +147,7 @@ class ViewVenue extends Component {
   searchbylocation = () => {
     this.resetdata();
     this.backuparr = this.state.venuedataarr;
-    var k = this.venuedata;
+    var k = this.state.venuedataarr;
     var q = k.filter(el => {
       console.log(el.venueName.toLowerCase().includes(this.state.search.toLowerCase()))
       return el.venueLocation.toLowerCase().includes(this.state.search.toLowerCase())
