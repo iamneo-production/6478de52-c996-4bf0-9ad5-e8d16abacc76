@@ -54,7 +54,7 @@ function App() {
             <Route exact path = "/user/signup" element={<Signup/>}/>
             <Route exact path="/user/login" element={<Login/>}/>
             <Route exact path="/" element={<Navigate replace to="/user/login"/>}/>
-            <Route exact path="/login" element={<Navigate replace to="/user/login"/>} />
+            <Route exact path="/login" element={<Navigate replace to="/user/login"/>}/>
             <Route exact path="/admin/login" element={<Navigate replace to="/user/login"/>}/>
           </Routes>
         ):(
@@ -72,6 +72,7 @@ function App() {
                   <Route exact path = "/admin/editUser" element={<EditUser />}/>
                   <Route exact path = "/admin/addVenue" element={<AddVenue/>}/>
                   <Route exact path = "/admin/viewVenue" element={<ViewVenue/>}/>
+                  <Route exact path = "/admin/editVenue" element={<EditVenue/>}/>
                   <Route exact path = "/admin" element={<Navigate replace to="/admin/displayUsers"/>}/>
                 </Routes>
               </>

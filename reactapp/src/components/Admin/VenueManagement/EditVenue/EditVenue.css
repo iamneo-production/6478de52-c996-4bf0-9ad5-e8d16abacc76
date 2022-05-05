@@ -17,14 +17,11 @@
     margin-right: auto;
     padding: 50px;
     width: 50%;
-    /* background-color:rgba(0,0,0,0.5); */
-    
     border-radius: 2%;
   }
   
-  .ant-list .ant-card-actions{
-    /* background-color: rgba(0,0,0,0.2); */
-  }
-  .ant-modal-body{
-    height: 400px;
-  }
+  
+  .bg-container
+  {
+     background-image: url("../../../../assets/bg.png");
+  } 

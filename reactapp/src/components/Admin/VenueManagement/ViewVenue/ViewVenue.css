@@ -1,20 +1,11 @@
 
-.ant-modal-body{
-    height: 400px;
-  }
-  .bg-container
- { min-height: 91vh;
-    background-image: url("../../../../assets/bg.png");
- } 
- 
-.ant-list .ant-card-actions{
-  /* background-color: rgba(0,0,0,0.2); */
-  border-radius: 50%;
-}
 .EditUser-Nav{
   margin: 20px 0px 0px 20px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+.css-1t6e9jv-MuiCardActions-root{
+  justify-content: space-between;
 }
