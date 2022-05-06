@@ -1,4 +1,4 @@
-import { Breadcrumbs, CardActionArea, IconButton, Rating, TextField, Typography } from '@mui/material';
+import { Breadcrumbs, CardActionArea,  IconButton, Rating, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from "@mui/material/Avatar";
@@ -18,7 +18,7 @@ export default function ViewVenue() {
         "venueLocation": "No Kunda",
         "venueImageUrl": "http://picsum.photos/127/100",
         "venueCapacity": 94726,
-        "rating":4,
+        "rating": 4,
         "venueDescription": "Phasellus in felis. Donec semper sapien a libero. Nam dui."
     }, {
         "venueId": 2,
@@ -26,7 +26,7 @@ export default function ViewVenue() {
         "venueLocation": "Belo Oriente",
         "venueImageUrl": "http://picsum.photos/159/100",
         "venueCapacity": 79889,
-        "rating":3,
+        "rating": 3,
         "venueDescription": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est."
     }, {
         "venueId": 3,
@@ -34,7 +34,7 @@ export default function ViewVenue() {
         "venueLocation": "Klevan’",
         "venueImageUrl": "http://picsum.photos/239/100",
         "venueCapacity": 89685,
-        "rating":2,
+        "rating": 2,
         "venueDescription": "Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros."
     }, {
         "venueId": 4,
@@ -42,7 +42,7 @@ export default function ViewVenue() {
         "venueLocation": "Ganjur",
         "venueImageUrl": "http://picsum.photos/111/100",
         "venueCapacity": 71626,
-        "rating":5,
+        "rating": 5,
         "venueDescription": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque."
     }, {
         "venueId": 5,
@@ -50,7 +50,7 @@ export default function ViewVenue() {
         "venueLocation": "Hadžići",
         "venueImageUrl": "http://picsum.photos/201/100",
         "venueCapacity": 53860,
-        "rating":1,
+        "rating": 1,
         "venueDescription": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis."
     }, {
         "venueId": 6,
@@ -58,7 +58,7 @@ export default function ViewVenue() {
         "venueLocation": "Filipowice",
         "venueImageUrl": "http://picsum.photos/246/100",
         "venueCapacity": 70784,
-        "rating":4,
+        "rating": 4,
         "venueDescription": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti."
     }, {
         "venueId": 7,
@@ -66,7 +66,7 @@ export default function ViewVenue() {
         "venueLocation": "Pingle",
         "venueImageUrl": "http://picsum.photos/166/100",
         "venueCapacity": 70352,
-        "rating":2,
+        "rating": 2,
         "venueDescription": "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus."
     }, {
         "venueId": 8,
@@ -74,7 +74,7 @@ export default function ViewVenue() {
         "venueLocation": "Khān Neshīn",
         "venueImageUrl": "http://picsum.photos/180/100",
         "venueCapacity": 61977,
-        "rating":3,
+        "rating": 3,
         "venueDescription": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque."
     }, {
         "venueId": 9,
@@ -82,7 +82,7 @@ export default function ViewVenue() {
         "venueLocation": "Cungapmimbo",
         "venueImageUrl": "http://picsum.photos/153/100",
         "venueCapacity": 61334,
-        "rating":5,
+        "rating": 5,
         "venueDescription": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi."
     }, {
         "venueId": 10,
@@ -90,7 +90,7 @@ export default function ViewVenue() {
         "venueLocation": "Barraute",
         "venueImageUrl": "http://picsum.photos/121/100",
         "venueCapacity": 56918,
-        "rating":2,
+        "rating": 2,
         "venueDescription": "In congue. Etiam justo. Etiam pretium iaculis justo."
     }];
 
@@ -112,9 +112,8 @@ export default function ViewVenue() {
         </Typography>
     ];
 
-    const handleEditUser = (user) => {
-        // alert(user.venueId);
-        navigate("/admin/editVenue/", { state: { user } })
+    const handleViewVenue = (user) => {
+        navigate("/admin/editVenue", { state: { user } })
     }
 
     useEffect(() => {
@@ -129,15 +128,15 @@ export default function ViewVenue() {
         }
     }, []);
     const deleteVenue = (key) => {
-        if(window.confirm("Press OK to Delete") == true){
-        var m = JSON.parse(localStorage.getItem("venue"));
-        var k = m.filter((el) => {
-            return !(el.venueId === key);
-        })
-        console.log(k);
-        localStorage.setItem("venue", JSON.stringify(k));
-        window.location.reload();
-    }
+        if (window.confirm("Press OK to Delete") === true) {
+            var m = JSON.parse(localStorage.getItem("venue"));
+            var k = m.filter((el) => {
+                return !(el.venueId === key);
+            })
+            console.log(k);
+            localStorage.setItem("venue", JSON.stringify(k));
+            window.location.reload();
+        }
     }
 
     const searchbyname = () => {
@@ -171,76 +170,72 @@ export default function ViewVenue() {
         console.log(backuparr, "hello");
         setState({ ...state, venuedataarr: backuparr });
     }
-    const loadsampledata=()=>{
-        setState({...state,venuedataarr:venuedata});
-        localStorage.setItem("venue",JSON.stringify(venuedata));
+    const loadsampledata = () => {
+        setState({ ...state, venuedataarr: venuedata });
+        localStorage.setItem("venue", JSON.stringify(venuedata));
     }
 
     return (
         <div>
             <Header highlight={"Users"} />
-            <div className='container-fluid bg-container min-vh-100'>
-                <Breadcrumbs separator="›" aria-label="breadcrumb">
-                    <Avatar style={{ width: 30, height: 30, marginRight: '8px' }}>
+                <div className="ViewVenue-Nav">
+                    <Avatar sx={{ width: 30, height: 30, marginRight: '8px' }}>
                         <span className="material-icons">person</span>
-                    </Avatar>{breadcrumbs}
-                </Breadcrumbs>
-                <div className='container d-flex justify-content-center' style={{ padding: "20px" }}>
-                    <input variant="outlined" style={{ padding: "5px", width: "45%" }}
-                        placeholder='Type Here to Search'
-                        value={state.search}
-                        onChange={(e) => { setState({ ...state, search: e.target.value }); console.log(e.target.value) }}>
-                    </input>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<Button variant="contained" onClick={searchbyname} disabled={reset}>Search By Venue Name</Button>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<Button variant="contained" onClick={searchbylocation} disabled={reset}>Search By Venue Location</Button>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<Button variant="contained" onClick={resetdata} disabled={!reset}>Reset</Button>
+                    </Avatar>
+                    <Breadcrumbs separator="›" aria-label="breadcrumb">
+                        {breadcrumbs}
+                    </Breadcrumbs>
                 </div>
-                
-                    {(state.venuedataarr.length !==0) ? 
+                <div className='ViewVenue-SearchWrapper'>
+                <TextField type="text" className='Search-Input'  id="venueName"  label="Enter Venue name" value={state.venueName}
+                        onChange={(e) => { setState({ ...state, venueName: e.target.value }); }}  variant="standard" size="medium" required/>
+                <Button variant="contained" className="ViewVenue-Button"  onClick={searchbyname} disabled={reset} >Search By Venue Name</Button>
+                <Button variant="contained" className="ViewVenue-Button" onClick={searchbylocation} disabled={reset} >Search By  Venue Location</Button>
+                <Button variant="contained" className="ViewVenue-Button" onClick={resetdata} disabled={!reset} >Reset</Button>
+                </div>
+
+                {(state.venuedataarr.length !== 0) ?
                     (
                         <Grid className="d-flex justify-content-center" container spacing={1}> {state.venuedataarr.map((cards, index) => {
-                        return (
-                            <Grid item style={{ padding: "20px" }} key={index}  id={"adminVenueGrid"+(index+1)}>
-                                <Card style={{ width: 350, borderRadius: "10px", border: "none"/* background: "rgba(0,0,0,0.4)"*/ }} hoverable="true">
-                                    <CardActionArea style={{ height: 350 }}>
-                                        <CardMedia
-                                            component="img"
-                                            style={{ width: 350, height: 200, objectFit: "contain" }}
-                                            image={cards.venueImageUrl}
-                                            alt="Venue Image"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
-                                                {cards.venueName}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                {"Place : " + cards.venueLocation}
+                            return (
+                                <Grid item style={{ padding: "20px" }} key={index} id={"adminVenueGrid" + (index + 1)}>
+                                    <Card style={{ width: 350, borderRadius: "10px", border: "none" }} hoverable="true">
+                                        <CardActionArea style={{ height: 350 }}>
+                                            <CardMedia
+                                                component="img"
+                                                style={{ width: 350, height: 200, objectFit: "contain" }}
+                                                image={cards.venueImageUrl}
+                                                alt="Venue Image"
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {cards.venueName}
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">
+                                                    {"Place : " + cards.venueLocation}
 
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                    <CardActions>
-                                        <div>
-                                            <IconButton aria-label="edit" onClick={() => handleEditUser(cards)} id="editVenue">
-                                                <span className="material-icons">edit</span>
-                                            </IconButton>
-                                            <IconButton aria-label="delete" color="error" onClick={() => deleteVenue(cards.venueId)} id="deleteVenue">
-                                                <span className="material-icons">delete</span>
-                                            </IconButton>
-                                        </div>
-                                        <Rating name="read-only" value={cards.rating} readOnly />
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                        <CardActions>
+                                            <div>
+                                                <IconButton aria-label="edit" onClick={() => handleViewVenue(cards)} id="editVenue">
+                                                    <span className="material-icons">edit</span>
+                                                </IconButton>
+                                                <IconButton aria-label="delete" color="error" onClick={() => deleteVenue(cards.venueId)} id="deleteVenue">
+                                                    <span className="material-icons">delete</span>
+                                                </IconButton>
+                                            </div>
+                                            <Rating name="read-only" value={cards.rating} readOnly />
 
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        );
-                    }
-                    )}
-                    </Grid>):(<div><div className="d-flex justify-content-center"> <h3>No Data to Display</h3></div><div className="d-flex justify-content-center"><Button variant="contained" onClick={loadsampledata} >Load Sample Data</Button></div></div>) }
-                
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            );
+                        }
+                        )}
+                        </Grid>) : (<div><div className="d-flex justify-content-center"> <h3>No Data to Display</h3></div><div className="d-flex justify-content-center"><Button variant="contained" onClick={loadsampledata} >Load Sample Data</Button></div></div>)}
                 <Button href="/admin/addVenue" variant="contained" size={"large"} id="addVenue" style={{ position: "fixed", right: "3%", bottom: "5%", width: "75px", height: "75px", borderRadius: "50%" }}><span className="material-icons">add</span></Button>
-
-            </div>
         </div>
     )
 }

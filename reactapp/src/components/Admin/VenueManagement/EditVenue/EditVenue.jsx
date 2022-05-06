@@ -1,17 +1,19 @@
-import { Avatar, Breadcrumbs, Link, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Avatar, Breadcrumbs, Button, Link, TextField, Typography } from '@mui/material';
+
+import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import './EditVenue.css';
 import Header from '../../../Header/Header';
-import { useLocation, useParams } from 'react-router-dom';
 export default function EditVenue() {
     const stater=useLocation();
     const [state,setState]=useState((stater.state.user));
      const onEditVenue = () => {
-        if(window.confirm("Press OK to Change") == true){
-        var m = JSON.parse(localStorage.getItem("venue"));
-        console.log(m[0].venueId == state.venueId)
+            if(state.venueId!==''&&state.venueImageUrl!==''&&state.venueName!==''&&state.venueCapacity!==''&&state.venueDescription!==''&&state.venueLocation!==''){
+                if(window.confirm("Press OK to Change") === true){
+                var m = JSON.parse(localStorage.getItem("venue"));
+        console.log(m[0].venueId === state.venueId)
         for (var i = 0; i < m.length; i++) {
-          if (m[i].venueId == state.venueId) {
+          if (m[i].venueId === state.venueId) {
            m[i].venueName=state.venueName;
            m[i].venueImageUrl=state.venueImageUrl;
            m[i].venueDescription=state.venueDescription;
@@ -20,7 +22,10 @@ export default function EditVenue() {
           }
         }
         localStorage.setItem("venue",JSON.stringify(m));
-        alert("changed");
+        alert("changed");} 
+    }
+    else{
+        alert("Please Fill All the Required fields");
     }
       }
       const breadcrumbs = [
@@ -40,44 +45,33 @@ export default function EditVenue() {
         </Typography>
     ];
   return (
-    <div className='outer bg-container'>
-    <Header highlight={"Users"} />
-    <Breadcrumbs separator="›" aria-label="breadcrumb">
-        <Avatar style={{ width: 30, height: 30, marginRight: '8px' }}>
+    <div>
+        <Header highlight="Users"/>
+        <div className="EditVenue-Nav">
+          <Avatar sx={{width: 30, height: 30, marginRight: '8px'}}>
             <span className="material-icons">person</span>
-        </Avatar>{breadcrumbs}
-    </Breadcrumbs>
-    <div className="inner container ">
-        <div className="form-group">
-            <input type="text" className="form-control" id="venueName" placeholder="Enter Venue name" value={state.venueName}
-                onChange={(e) => { setState({ ...state, venueName: e.target.value }); }} required>
-            </input>
+          </Avatar>
+          <Breadcrumbs separator="›" aria-label="breadcrumb">
+            {breadcrumbs}
+          </Breadcrumbs>
         </div>
-        <br />
-        <div className="form-group">
-            <input type="text" className="form-control" id="capacityOfVenue" placeholder="Enter the capacity of the venue" value={state.venueCapacity}
-                onChange={(e) => { setState({ ...state, venueCapacity: e.target.value }); }} required>
-            </input>
+        <div className="EditVenue-Form">
+        <TextField type="text" className='EditVenue-Input'  id="venueName"  label="Enter Venue name" value={state.venueName}
+                        onChange={(e) => { setState({ ...state, venueName: e.target.value }); }}  variant="standard" required/>
+            <TextField type="text" className='EditVenue-Input'  id="capacityOfVenue" label="Enter the capacity of the venue" value={state.venueCapacity}
+                        onChange={(e) => { setState({ ...state, venueCapacity: e.target.value }); }}  variant="standard" required/>
+                    
+                    <TextField type="text" className='EditVenue-Input'  id="imageurl" label="Enter the Venue Image Url" value={state.venueImageUrl}
+                        onChange={(e) => { setState({ ...state, venueImageUrl: e.target.value }); }}  variant="standard" required/>
+                    <TextField type="text" className='EditVenue-Input'  id="venueLocation" label="Enter Venue Location" value={state.venueLocation}
+                        onChange={(e) => { setState({ ...state, venueLocation: e.target.value }); }}  variant="standard" required/>
+
+                    <TextField type="text" className='EditVenue-Input' minRows={3} multiline  id="venueDescription" label="Enter the Venue Description" value={state.venueDescription}
+                        onChange={(e) => { setState({ ...state, venueDescription: e.target.value }); }}  variant="standard" required/>
+          <div className="EditVenue-ButtonWrapper">
+          <Button variant="contained" className="EditVenue-Button" id="editVenue" onClick={() => { onEditVenue(); }}>Update</Button>
+          </div>
         </div>
-        <br />
-        <div className="form-group">
-            <input type="text" className="form-control" id="imageurl" placeholder="Enter the Venue Image Url" value={state.venueImageUrl}
-                onChange={(e) => { setState({ ...state, venueImageUrl: e.target.value }); }} required>
-            </input>
-        </div>
-        <br />
-        <div className="form-group">
-            <input type="text" className="form-control" id="venueLocation" placeholder="Enter Venue Location" value={state.venueLocation}
-                onChange={(e) => { setState({ ...state, venueLocation: e.target.value }); }} required></input>
-        </div>
-        <br />
-        <div className="form-group">
-            <textarea type="text" className="form-control" id="venueDescription" placeholder="Enter the Venue Description" value={state.venueDescription}
-                onChange={(e) => { setState({ ...state, venueDescription: e.target.value }); }} required></textarea>
-        </div>
-        <br />
-        <button type='submit' className="btn btn-primary" id="editVenue" onClick={() => { onEditVenue() }}>Update</button>
     </div>
-</div>
   )
 }
