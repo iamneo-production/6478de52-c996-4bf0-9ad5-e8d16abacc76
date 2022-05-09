@@ -3,7 +3,7 @@ import React, {  useState } from 'react';
 import "./AddVenue.css";
 import Header from '../../../Header/Header';
 export default function AddVenue() {
-    const [state, setState] = useState({
+    const [venue, setVenue] = useState({
         venueId: '',
         venueName: '',
         venueImageUrl: '',
@@ -14,16 +14,17 @@ export default function AddVenue() {
     });
 
     const onAddVenue = () => {
-        if(state.venueId!==''&&state.venueImageUrl!==''&&state.venueName!==''&&state.venueCapacity!==''&&state.venueDescription!==''&&state.venueLocation!==''){
+        console.log(venue);
+        if(venue.venueImageUrl!==''&&venue.venueName!==''&&venue.venueCapacity!==''&&venue.venueDescription!==''&&venue.venueLocation!==''){
         if(window.confirm("Press OK to Add") === true){
-        console.log(state);
+        console.log(venue);
         var q = {
             venueId: 'id' + Math.random().toString(36).substr(2, 9),
-            venueName: state.venueName,
-            venueImageUrl: state.venueImageUrl,
-            venueDescription: state.venueDescription,
-            venueLocation: state.venueLocation,
-            venueCapacity: state.venueCapacity,
+            venueName: venue.venueName,
+            venueImageUrl: venue.venueImageUrl,
+            venueDescription: venue.venueDescription,
+            venueLocation: venue.venueLocation,
+            venueCapacity: venue.venueCapacity,
         };
         console.log(q);
         var t = localStorage.getItem("venue");
@@ -32,8 +33,8 @@ export default function AddVenue() {
         t.push(q);
         localStorage.setItem("venue", JSON.stringify(t));
         console.log(JSON.parse(localStorage.getItem("venue")));
-        setState({ venueDataarr: '', venueId: '', venueName: '', venueImageUrl: '', venueDescription: '', venueLocation: '', venueCapacity: '' });
-        console.log(state);
+        setVenue({ venueDataarr: '', venueId: '', venueName: '', venueImageUrl: '', venueDescription: '', venueLocation: '', venueCapacity: '' });
+        console.log(venue);
     }
 }else{
     alert("Please Fill All the Required Fields")
@@ -67,20 +68,20 @@ export default function AddVenue() {
           </Breadcrumbs>
         </div>
         <div className="AddVenue-Form">
-        <TextField type="text" className='AddVenue-Input'  id="venueName"  label="Enter Venue name" value={state.venueName}
-                        onChange={(e) => { setState({ ...state, venueName: e.target.value }); }}  variant="standard" required/>
-            <TextField type="text" className='AddVenue-Input'  id="capacityOfVenue" label="Enter the capacity of the venue" value={state.venueCapacity}
-                        onChange={(e) => { setState({ ...state, venueCapacity: e.target.value }); }}  variant="standard" required/>
+        <TextField type="text" className='AddVenue-Input'  id="venueName"  label="Enter Venue name" value={venue.venueName}
+                        onChange={(e) => { setVenue({ ...venue, venueName: e.target.value }); }}  variant="standard" required/>
+            <TextField type="text" className='AddVenue-Input'  id="capacityOfVenue" label="Enter the capacity of the venue" value={venue.venueCapacity}
+                        onChange={(e) => { setVenue({ ...venue, venueCapacity: e.target.value }); }}  variant="standard" required/>
                     
-                    <TextField type="text" className='AddVenue-Input'  id="imageurl" label="Enter the Venue Image Url" value={state.venueImageUrl}
-                        onChange={(e) => { setState({ ...state, venueImageUrl: e.target.value }); }}  variant="standard" required/>
-                    <TextField type="text" className='AddVenue-Input'  id="venueLocation" label="Enter Venue Location" value={state.venueLocation}
-                        onChange={(e) => { setState({ ...state, venueLocation: e.target.value }); }}  variant="standard" required/>
+                    <TextField type="text" className='AddVenue-Input'  id="imageurl" label="Enter the Venue Image Url" value={venue.venueImageUrl}
+                        onChange={(e) => { setVenue({ ...venue, venueImageUrl: e.target.value }); }}  variant="standard" required/>
+                    <TextField type="text" className='AddVenue-Input'  id="venueLocation" label="Enter Venue Location" value={venue.venueLocation}
+                        onChange={(e) => { setVenue({ ...venue, venueLocation: e.target.value }); }}  variant="standard" required/>
 
-                    <TextField type="text" className='AddVenue-Input' minRows={3} multiline  id="venueDescription" label="Enter the Venue Description" value={state.venueDescription}
-                        onChange={(e) => { setState({ ...state, venueDescription: e.target.value }); }}  variant="standard" required/>
+                    <TextField type="text" className='AddVenue-Input' minRows={3} multiline  id="venueDescription" label="Enter the Venue Description" value={venue.venueDescription}
+                        onChange={(e) => { setVenue({ ...venue, venueDescription: e.target.value }); }}  variant="standard" required/>
           <div className="AddVenue-ButtonWrapper">
-          <Button variant="contained" className="AddVenue-Button" id="addVenue" onClick={() => { onAddVenue(); }}>Add</Button>
+          <Button variant="contained" className="AddVenue-Button" id="addVenue" onClick={onAddVenue}>Add</Button>
           </div>
         </div>
     </div>

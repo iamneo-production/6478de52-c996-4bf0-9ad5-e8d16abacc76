@@ -1,4 +1,4 @@
-import { Breadcrumbs, CardActionArea,  IconButton, Rating, TextField, Typography } from '@mui/material';
+import { Breadcrumbs, CardActionArea,  Dialog,  DialogActions,  DialogContent,  DialogContentText,  DialogTitle,  IconButton, Rating, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Avatar from "@mui/material/Avatar";
@@ -95,13 +95,8 @@ export default function ViewVenue() {
     }];
 
     let navigate = useNavigate();
-
-    const [state, setState] = useState({
-        search: '',
-        venuedataarr: [],
-        isModalVisible: false,
-        getId: ''
-    });
+   
+    const [deleteModalOpen, setDeleteModalOpen] =useState({modal:false,venueId:''});
     const [reset, setReset] = useState(false);
     const breadcrumbs = [
         <Typography key="1" color="inherit">
@@ -120,15 +115,15 @@ export default function ViewVenue() {
         var u = (localStorage.getItem("venue") !== null) ? JSON.parse(localStorage.getItem("venue")) : [];
         console.log(localStorage.getItem("venue") === null, u);
         if (u.length === 0) {
-            setState({ ...state, venuedataarr: [] });
+            setVenue({ ...venue, venuedataarr: [] });
             localStorage.setItem("venue", JSON.stringify([]));
         }
         else {
-            setState({ ...state, venuedataarr: u });
+            setVenue({ ...venue, venuedataarr: u });
         }
     }, []);
     const deleteVenue = (key) => {
-        if (window.confirm("Press OK to Delete") === true) {
+        setDeleteModalOpen({...deleteModalOpen,venueId:''});
             var m = JSON.parse(localStorage.getItem("venue"));
             var k = m.filter((el) => {
                 return !(el.venueId === key);
@@ -136,42 +131,53 @@ export default function ViewVenue() {
             console.log(k);
             localStorage.setItem("venue", JSON.stringify(k));
             window.location.reload();
-        }
     }
-
+    const handleClickOpen = (vId) => {
+        setDeleteModalOpen({...deleteModalOpen,modal:true,venueId:vId});
+      };
+    
+      const handleClose = () => {
+        setDeleteModalOpen({...deleteModalOpen,modal:false});
+      };
+    const [venue, setVenue] = useState({
+        search: '',
+        venuedataarr: [],
+        isModalVisible: false,
+        getId: ''
+    });
     const searchbyname = () => {
         resetdata();
-        backuparr = state.venuedataarr;
+        backuparr = venue.venuedataarr;
         console.log(backuparr, "backuparr");
         setReset(true);
-        var k = state.venuedataarr;
+        var k = venue.venuedataarr;
         console.log(k);
         var q = k.filter((el) => {
-            console.log(el.venueName.toLowerCase().includes(state.search.toLowerCase()), el.venueName.toLowerCase(), state.search.toLowerCase())
-            return el.venueName.toLowerCase().includes(state.search.toLowerCase())
+            console.log(el.venueName.toLowerCase().includes(venue.search.toLowerCase()), el.venueName.toLowerCase(), venue.search.toLowerCase())
+            return el.venueName.toLowerCase().includes(venue.search.toLowerCase())
         })
         console.log(q);
-        setState({ ...state, venuedataarr: q });
+        setVenue({ ...venue, venuedataarr: q });
     }
     const searchbylocation = () => {
         resetdata();
-        backuparr = state.venuedataarr;
+        backuparr = venue.venuedataarr;
         console.log(backuparr, "backuparr");
         setReset(true);
-        var k = state.venuedataarr;
+        var k = venue.venuedataarr;
         var q = k.filter(el => {
-            console.log(el.venueLocation.toLowerCase().includes(state.search.toLowerCase()))
-            return el.venueLocation.toLowerCase().includes(state.search.toLowerCase())
+            console.log(el.venueLocation.toLowerCase().includes(venue.search.toLowerCase()))
+            return el.venueLocation.toLowerCase().includes(venue.search.toLowerCase())
         })
-        setState({ ...state, venuedataarr: q });
+        setVenue({ ...venue, venuedataarr: q });
     }
     const resetdata = () => {
         setReset(false);
         console.log(backuparr, "hello");
-        setState({ ...state, venuedataarr: backuparr });
+        setVenue({ ...venue, venuedataarr: backuparr });
     }
     const loadsampledata = () => {
-        setState({ ...state, venuedataarr: venuedata });
+        setVenue({ ...venue, venuedataarr: venuedata });
         localStorage.setItem("venue", JSON.stringify(venuedata));
     }
 
@@ -187,16 +193,16 @@ export default function ViewVenue() {
                     </Breadcrumbs>
                 </div>
                 <div className='ViewVenue-SearchWrapper'>
-                <TextField type="text" className='Search-Input'  id="venueName"  label="Enter Venue name" value={state.venueName}
-                        onChange={(e) => { setState({ ...state, venueName: e.target.value }); }}  variant="standard" size="medium" required/>
+                <TextField type="text" className='Search-Input'  id="venueName"  label="Enter Venue name" value={venue.venueName}
+                        onChange={(e) => { setVenue({ ...venue, search: e.target.value }); }}  variant="standard" size="medium" required/>
                 <Button variant="contained" className="ViewVenue-Button"  onClick={searchbyname} disabled={reset} >Search By Venue Name</Button>
                 <Button variant="contained" className="ViewVenue-Button" onClick={searchbylocation} disabled={reset} >Search By  Venue Location</Button>
                 <Button variant="contained" className="ViewVenue-Button" onClick={resetdata} disabled={!reset} >Reset</Button>
                 </div>
 
-                {(state.venuedataarr.length !== 0) ?
+                {(venue.venuedataarr.length !== 0) ?
                     (
-                        <Grid className="d-flex justify-content-center" container spacing={1}> {state.venuedataarr.map((cards, index) => {
+                        <Grid className="d-flex justify-content-center" container spacing={1}> {venue.venuedataarr.map((cards, index) => {
                             return (
                                 <Grid item style={{ padding: "20px" }} key={index} id={"adminVenueGrid" + (index + 1)}>
                                     <Card style={{ width: 350, borderRadius: "10px", border: "none" }} hoverable="true">
@@ -222,7 +228,7 @@ export default function ViewVenue() {
                                                 <IconButton aria-label="edit" onClick={() => handleViewVenue(cards)} id="editVenue">
                                                     <span className="material-icons">edit</span>
                                                 </IconButton>
-                                                <IconButton aria-label="delete" color="error" onClick={() => deleteVenue(cards.venueId)} id="deleteVenue">
+                                                <IconButton aria-label="delete" color="error" onClick={() => handleClickOpen(cards.venueId)} id="deleteVenue">
                                                     <span className="material-icons">delete</span>
                                                 </IconButton>
                                             </div>
@@ -236,6 +242,27 @@ export default function ViewVenue() {
                         )}
                         </Grid>) : (<div><div className="d-flex justify-content-center"> <h3>No Data to Display</h3></div><div className="d-flex justify-content-center"><Button variant="contained" onClick={loadsampledata} >Load Sample Data</Button></div></div>)}
                 <Button href="/admin/addVenue" variant="contained" size={"large"} id="addVenue" style={{ position: "fixed", right: "3%", bottom: "5%", width: "75px", height: "75px", borderRadius: "50%" }}><span className="material-icons">add</span></Button>
+                <Dialog
+        open={deleteModalOpen.modal}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Delete Venue"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={()=>deleteVenue(deleteModalOpen.venueId)} color="primary">Yes</Button>
+          <Button onClick={handleClose} color="success" autoFocus>
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
         </div>
     )
 }
