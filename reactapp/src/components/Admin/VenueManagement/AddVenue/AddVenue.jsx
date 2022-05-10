@@ -2,6 +2,7 @@ import { Avatar, Breadcrumbs, Button, Link, TextField, Typography } from '@mui/m
 import React, {  useState } from 'react';
 import "./AddVenue.css";
 import Header from '../../../Header/Header';
+import { useNavigate } from 'react-router-dom';
 export default function AddVenue() {
     const [venue, setVenue] = useState({
         venueId: '',
@@ -12,7 +13,7 @@ export default function AddVenue() {
         venueCapacity: '',
         venueDataarr: []
     });
-
+    let navigate = useNavigate();
     const onAddVenue = () => {
         console.log(venue);
         if(venue.venueImageUrl!==''&&venue.venueName!==''&&venue.venueCapacity!==''&&venue.venueDescription!==''&&venue.venueLocation!==''){
@@ -48,7 +49,7 @@ export default function AddVenue() {
             key="2"
             color="inherit"
             underline="hover"
-            href="/admin/viewVenue"
+            onClick={()=>{ navigate("/admin/viewVenue")}}
         >
             Venues
         </Link>,

@@ -46,7 +46,7 @@ export default function EditVenue() {
       key="2"
       color="inherit"
       underline="hover"
-      href="/admin/viewVenue"
+      onClick={()=>{ navigate("/admin/viewVenue")}}
     >
       Venues
     </Link>,

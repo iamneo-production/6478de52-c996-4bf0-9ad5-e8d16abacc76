@@ -241,7 +241,7 @@ export default function ViewVenue() {
                         }
                         )}
                         </Grid>) : (<div><div className="d-flex justify-content-center"> <h3>No Data to Display</h3></div><div className="d-flex justify-content-center"><Button variant="contained" onClick={loadsampledata} >Load Sample Data</Button></div></div>)}
-                <Button href="/admin/addVenue" variant="contained" size={"large"} id="addVenue" style={{ position: "fixed", right: "3%", bottom: "5%", width: "75px", height: "75px", borderRadius: "50%" }}><span className="material-icons">add</span></Button>
+                <Button onClick={()=> navigate("/admin/addVenue")} variant="contained" size={"large"} id="addVenue" style={{ position: "fixed", right: "3%", bottom: "5%", width: "75px", height: "75px", borderRadius: "50%" }}><span className="material-icons">add</span></Button>
                 <Dialog
         open={deleteModalOpen.modal}
         onClose={handleClose}

@@ -36,7 +36,7 @@ function AdminHeader({ highlight}) {
     AsyncStorage.clear()
     navigate('/')
   }
-
+const navroutes=['/admin/displayUsers','/admin/viewVenue','/admin','/admin']
   useEffect( () => {
     userType.toLowerCase() === 'admin' 
       ? setMenuItems(['Users', 'Venues', 'Teams', 'Referees']) 
@@ -85,8 +85,8 @@ function AdminHeader({ highlight}) {
               }}
             >
               {
-                menuItems.map((menuItem) => (
-                  <MenuItem key={menuItem} onClick={() => navigate('/admin')}>
+                menuItems.map((menuItem,index) => (
+                  <MenuItem key={menuItem} onClick={() => {navigate(navroutes[index])}}>
                     <Typography textAlign="center">{menuItem}</Typography>
                   </MenuItem>
                 ))
@@ -103,10 +103,10 @@ function AdminHeader({ highlight}) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft: '30px' }}>
             {
-              menuItems.map((menuItem) => (
+              menuItems.map((menuItem,index) => (
                 <Button 
                   key={menuItem} 
-                  onClick={() => navigate('/admin')}  
+                  onClick={() => navigate(navroutes[index])}  
                   className="Header-Button"            
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
