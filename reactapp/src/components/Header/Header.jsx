@@ -36,7 +36,7 @@ function AdminHeader({ highlight}) {
     AsyncStorage.clear()
     navigate('/')
   }
-const navroutes=['/admin/displayUsers','/admin/viewVenue','/admin','/admin']
+const navroutes=['/admin/displayUsers','/admin/viewVenue','/admin/viewTeam','/admin']
   useEffect( () => {
     userType.toLowerCase() === 'admin' 
       ? setMenuItems(['Users', 'Venues', 'Teams', 'Referees']) 

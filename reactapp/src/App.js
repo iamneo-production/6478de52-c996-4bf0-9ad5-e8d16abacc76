@@ -11,6 +11,12 @@ import EditUser from './components/Admin/UserManagement/EditUser/EditUser';
 import AddVenue from './components/Admin/VenueManagement/AddVenue/AddVenue';
 import ViewVenue from './components/Admin/VenueManagement/ViewVenue/ViewVenue';
 import EditVenue from './components/Admin/VenueManagement/EditVenue/EditVenue';
+import AddTeam from './components/Admin/TeamManagement/AddTeam/AddTeam';
+import ViewTeam from './components/Admin/TeamManagement/ViewTeam/ViewTeam';
+import EditTeam from './components/Admin/TeamManagement/EditTeam/EditTeam';
+import AddPlayer from './components/Admin/TeamManagement/AddPlayer/AddPlayer';
+import ViewPlayer from './components/Admin/TeamManagement/ViewPlayer/ViewPlayer';
+import Editplayer from './components/Admin/TeamManagement/EditPlayer/EditPlayer';
 
 
 function App() {
@@ -73,6 +79,12 @@ function App() {
                   <Route exact path = "/admin/addVenue" element={<AddVenue/>}/>
                   <Route exact path = "/admin/viewVenue" element={<ViewVenue/>}/>
                   <Route exact path = "/admin/editVenue" element={<EditVenue/>}/>
+                  <Route exact path = "/admin/addTeam" element={<AddTeam/>}/>
+                  <Route exact path = "/admin/viewTeam" element={<ViewTeam/>}/>
+                  <Route exact path = "/admin/editTeam" element={<EditTeam/>}/>
+                  <Route exact path = "/admin/addPlayer" element={<AddPlayer/>}/>
+                  <Route exact path = "/admin/viewPlayer" element={<ViewPlayer/>}/>
+                  <Route exact path = "/admin/editplayer" element={<Editplayer/>}/>
                   <Route exact path = "/admin" element={<Navigate replace to="/admin/displayUsers"/>}/>
                 </Routes>
               </>
