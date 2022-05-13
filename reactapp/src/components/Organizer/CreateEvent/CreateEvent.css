@@ -1,0 +1,7 @@
+.CreateEvent-Nav{
+    margin: 20px 0px 0px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
