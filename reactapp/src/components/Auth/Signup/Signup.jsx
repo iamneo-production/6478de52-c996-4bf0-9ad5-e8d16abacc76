@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Signup.css'
-import { useStateValue } from "../../../functions/Utils/StateProvider";
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { validateFields, saveUser } from '../../../functions/Auth/Signup';
 
 
 function Signup() {
-  const [state, dispatch] = useStateValue();
   const [values, setValues] = useState({
     type: '',
     email: '',
@@ -24,9 +18,10 @@ function Signup() {
     errorMsg: '',
     showError: false,
   });
+  const [userSaved, setUsersaved] = useState(false)
   let navigate = useNavigate();
 
-  const performSignup = () => {
+  const performSignup = async () => {
     if(values.email === '' || values.username ==='' || values.mobileno === '' || values.password === '' || values.cpassword === ''){
       setValues({...values, showError: true, errorMsg:"Required Fields Missing"})
       setTimeout(() => {
@@ -40,8 +35,7 @@ function Signup() {
           setValues({...values, showError: false, errorMsg: ''})
         }, 3000);
       }else{
-        saveUser(values)
-        // navigate('/')
+        setUsersaved(saveUser(values))
       }
     }
   }
@@ -49,6 +43,14 @@ function Signup() {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   }
+
+  useEffect(() => {
+    if(userSaved){
+      navigate('/')
+    }
+  }, [userSaved])
+
+  
 
   return (
     <div className="Signin-Container">
@@ -67,19 +69,6 @@ function Signup() {
               <div style={{marginBottom:"45px"}}></div>
             )
           }
-          {/* <FormControl variant="standard" className="Signin-Input" error = {values.showError}>
-            <InputLabel id="admin/user-label">Admin/User *</InputLabel>
-            <Select
-              labelId="admin/user-label"
-              id="admin/user"
-              value={values.type}
-              label="Admin/User *"
-              onChange={handleChange('type')}
-            >
-              <MenuItem value={'admin'}>Admin</MenuItem>
-              <MenuItem value={'user'}>User</MenuItem>
-            </Select>
-          </FormControl> */}
           <TextField
             error = {values.showError}
             id="email"

@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import { validateUser } from '../../../functions/Auth/Login';
+import { validateUser, loginUser } from '../../../functions/Auth/Login';
 import Alert from '@mui/material/Alert';
 
 function Login() {
@@ -33,12 +33,12 @@ function Login() {
     }else{
       const res = validateUser(values.username, values.password)
       if(res.status){
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: res.userID,
-          userType : res.userType
-        });
-        res.userType === 'admin' ? navigate('/admin') : res.userType === 'organizer' ? navigate('/organizer') : navigate('/user')
+        // dispatch({
+        //   type: actionTypes.SET_USER,
+        //   user: res.userID,
+        //   userType : res.userType
+        // });
+        // res.userType === 'admin' ? navigate('/admin') : res.userType === 'organizer' ? navigate('/organizer') : navigate('/user')
       }else{
         setValues({...values, showError: true, errorMsg: 'Invalid Username/Password'})
         setTimeout(() => {

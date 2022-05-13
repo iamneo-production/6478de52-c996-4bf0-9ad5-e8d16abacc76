@@ -1,7 +1,6 @@
-import axios from 'axios'
+import { ApiClient } from '../Utils/ApiClient';
 
 function validateFields(values){
-    console.log(values)
     let res = {
         status : true,
         error: ''
@@ -26,56 +25,21 @@ function validateFields(values){
     return res
 }
 
-function saveUser(details){
+async function saveUser(details){
 
-    console.log("Saving User")
+    const data = {
+        email : details.email,
+        password: details.password,
+        username: details.username,
+        mobileNumber: details.mobileno
+    }
 
-    const ApiClient = axios.create({
-        baseURL: 'https://8080-dccdbfcccfcbdcebaeffacefbcaeebfacaee.examlyiopb.examly.io'
+    ApiClient.post('/user/signup', data)
+        .then(response => {
+        if (response.data) {
+            return new Promise.resolve(response.data)
+        }
     });
-
-    ApiClient.post('/user/signup', {
-                "email": "test@gmail.com",
-                "password": "test",
-                "username": "test",
-                "mobileNumber": "0123456789"
-            }).then(response => {
-      if (response.data) {
-          console.log(response.data)
-      }
-    });
-
-
-    // fetch('http://localhost:8080/user/signup', {
-    //     method: 'POST',
-    //     mode: 'cors',
-    //     headers: {
-    //         'Content-Type': 'application/x-www-form-urlencoded',
-    //         'Accept': '*/*',
-    //         'Access-Control-Allow-Origin': 'http://localhost:8080'
-    //     },
-    //     body: JSON.stringify({
-    //         "email": "test@gmail.com",
-    //         "password": "test",
-    //         "username": "test",
-    //         "mobileNumber": "0123456789"
-    //     }),
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-
-    // axios.post('http://localhost:8080/user/signup', {
-    //     email: "test@gmail.com",
-    //     password: "test",
-    //     username: "test",
-    //     mobileNumber: "0123456789"
-    // })
-    // .then(function (response) {
-    //     console.log(response);
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
 }
 
 export { validateFields, saveUser }
