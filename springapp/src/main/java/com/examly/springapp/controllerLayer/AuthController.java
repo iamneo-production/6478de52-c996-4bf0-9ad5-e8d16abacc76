@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.examly.springapp.jwtUtil.JwtUtil;
 import com.examly.springapp.modelLayer.AuthenticationResponse;
+import com.examly.springapp.modelLayer.UserModel;
+import com.examly.springapp.repositoryLayer.UserRepository;
 
 @RestController
 public class AuthController {
@@ -25,9 +27,12 @@ public class AuthController {
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     private JwtUtil jwtTokenUtil;
     @Autowired
     private AuthenticationManager authenticationManager;
+    
 
     // This function will work for both user and admin
     @PostMapping(value="/login")
@@ -41,10 +46,11 @@ public class AuthController {
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        UserModel userModel = userRepository.findByEmail(userDetails.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, userModel.getRole(), userModel.getUserId() ));
     }
 
     @PostMapping(value="/user/signup")

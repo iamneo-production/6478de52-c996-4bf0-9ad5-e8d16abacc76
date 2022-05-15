@@ -8,11 +8,14 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { editUser } from '../../../../functions/Admin/UserManagement/EditUser';
+import { useStateValue } from '../../../../functions/Utils/StateProvider';
 
 function EditUser() {
 
   const {state} = useLocation()
   const {user} = state
+  const [{jwt}, dispatch] = useStateValue();
   const [values, setValues] = useState({
     errorMsg: '',
     showError: false,
@@ -38,6 +41,12 @@ function EditUser() {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+  }
+
+  const handleEditUser = () => {
+    editUser(values, jwt).then((res) => {
+      navigate('/admin/displayUsers')
+    })
   }
 
   useEffect(() => {
@@ -84,7 +93,7 @@ function EditUser() {
             variant="standard"
           />
           <div className="EditUser-ButtonWrapper">
-            <Button variant="contained" className="EditUser-Button" onClick={() => console.log('Updated')}>Update</Button>
+            <Button variant="contained" className="EditUser-Button" onClick={() => handleEditUser()}>Update</Button>
           </div>
         </div>
     </div>

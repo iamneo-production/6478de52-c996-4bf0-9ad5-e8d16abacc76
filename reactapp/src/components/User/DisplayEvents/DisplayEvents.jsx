@@ -9,7 +9,7 @@ import { useStateValue } from '../../../functions/Utils/StateProvider';
 
 function DisplayEvents() {
 
-  const [{userType}, dispatch] = useStateValue();
+  const [{userType}] = useStateValue();
 
   const breadcrumbs = [
     <Typography key="1" color="inherit">

@@ -10,10 +10,12 @@ import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
-import { validateUser, loginUser } from '../../../functions/Auth/Login';
+import { validateUser } from '../../../functions/Auth/Login';
 import Alert from '@mui/material/Alert';
+import { setAuthorizationHeader } from '../../../functions/Utils/ApiClient';
 
 function Login() {
+
   const [state, dispatch] = useStateValue();
   const [values, setValues] = useState({
     username: '',
@@ -24,21 +26,28 @@ function Login() {
   });
   let navigate = useNavigate();
 
-  const performLogin = () => {
+  const performLogin = async () => {
     if(values.username === '' || values.password === ''){
       setValues({...values, showError: true, errorMsg: 'Required Fields Missing'})
       setTimeout(() => {
         setValues({...values, showError: false, errorMsg: ''})
       }, 3000);
     }else{
-      const res = validateUser(values.username, values.password)
+      const res = await validateUser(values.username, values.password)
       if(res.status){
-        // dispatch({
-        //   type: actionTypes.SET_USER,
-        //   user: res.userID,
-        //   userType : res.userType
-        // });
-        // res.userType === 'admin' ? navigate('/admin') : res.userType === 'organizer' ? navigate('/organizer') : navigate('/user')
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: res.userID,
+          userType : res.userRole
+        });
+        dispatch({
+          type: actionTypes.SET_JWT,
+          jwt: res.jwt
+        });
+        setAuthorizationHeader(res.jwt)
+        setTimeout(() => {
+          res.userRole === 'admin' ? navigate('/admin') : res.userRole === 'organizer' ? navigate('/organizer') : navigate('/user')
+        }, 1000)
       }else{
         setValues({...values, showError: true, errorMsg: 'Invalid Username/Password'})
         setTimeout(() => {
@@ -64,7 +73,7 @@ function Login() {
     <div className="Login-Container">
       <div className="Login-Wrapper">
         <div className="Login-Left">
-          <img src="../assets/Login/landing.jpg" className="Login-Image"/>
+          <img src="../assets/Login/landing.jpg" alt="login" className="Login-Image"/>
         </div>
         <div className="Login-Right">
           <h2 className="Login-Header">Login</h2>

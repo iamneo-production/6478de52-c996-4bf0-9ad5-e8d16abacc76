@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Signup.css'
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -18,7 +18,6 @@ function Signup() {
     errorMsg: '',
     showError: false,
   });
-  const [userSaved, setUsersaved] = useState(false)
   let navigate = useNavigate();
 
   const performSignup = async () => {
@@ -35,7 +34,10 @@ function Signup() {
           setValues({...values, showError: false, errorMsg: ''})
         }, 3000);
       }else{
-        setUsersaved(saveUser(values))
+        saveUser(values)
+        saveUser(values).then(res=> {
+          navigate('/')
+        })
       }
     }
   }
@@ -44,19 +46,13 @@ function Signup() {
     setValues({ ...values, [prop]: event.target.value });
   }
 
-  useEffect(() => {
-    if(userSaved){
-      navigate('/')
-    }
-  }, [userSaved])
-
   
 
   return (
     <div className="Signin-Container">
       <div className="Signin-Wrapper">
         <div className="Signin-Left">
-          <img src="../assets/Signup/landing.png" className="Signin-Image"/>
+          <img src="../assets/Signup/landing.png" alt="signup" className="Signin-Image"/>
         </div>
         <div className="Signin-Right">
           <h2 className="Signin-Header">Register</h2>

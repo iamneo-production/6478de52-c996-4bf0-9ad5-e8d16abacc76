@@ -7,14 +7,11 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import FormControl from '@mui/material/FormControl';
-import Box from '@mui/material/Box';
 
 function BookEvent() {
 
@@ -48,12 +45,6 @@ function BookEvent() {
     const handleChange = (prop) => (event) => {
       setValues({ ...values, [prop]: event.target.value });
     }
-
-    const Div = styled('div')(({ theme }) => ({
-      ...theme.typography.button,
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(1),
-    }));
 
     return (
       <div>

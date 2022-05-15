@@ -16,7 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 function AdminHeader({ highlight}) {
 
-  const [{user, userType}, dispatch] = useStateValue();
+  const [{userType}, dispatch] = useStateValue();
   const [menuItems, setMenuItems] = useState([]);
   const [anchorElNav, setAnchorElNav] = useState(null);
   let navigate = useNavigate();
@@ -38,14 +38,12 @@ function AdminHeader({ highlight}) {
   }
 
   useEffect(() => {
-    console.log("Setting MenuItems")
     userType.toLowerCase() === 'admin' 
       ? setMenuItems([{"name":'Users', "route": '/admin/displayUsers'}, {"name":'Venues', "route": '/admin/viewVenue'}, {"name":'Teams', "route": '/admin/'}, {"name":'Referees', "route": '/admin/'}]) 
       : userType.toLowerCase() === 'organizer' 
         ? setMenuItems([{"name":'View Events', "route": '/organizer/displayEvents'}, {"name":'Create Event', "route": '/organizer/createEvent'}])
         : setMenuItems([{"name":'Book Tickets', "route": '/user/displayEvents'}, {"name":'View Booked Tickets', "route": '/user/'}])
-    console.log(menuItems)
-  }, [])
+  }, [userType])
 
   return (
     <AppBar position="static">
@@ -56,7 +54,7 @@ function AdminHeader({ highlight}) {
             component="div"
             sx={{ display: { xs: 'none', md: 'flex' } }}
           >
-            <img src="../assets/Header/logo.png" className="Header-Logo"/>
+            <img src="../assets/Header/logo.png" alt="logo" className="Header-Logo"/>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -103,7 +101,7 @@ function AdminHeader({ highlight}) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            <img src="../assets/Header/logo.png" className="Header-Logo"/>
+            <img src="../assets/Header/logo.png" alt="logo" className="Header-Logo"/>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft: '30px' }}>
             {

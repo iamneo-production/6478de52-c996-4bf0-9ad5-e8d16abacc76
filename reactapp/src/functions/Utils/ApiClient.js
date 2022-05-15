@@ -3,8 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storageKey = 'jwt';
 
+// export const ApiClient = axios.create({
+//     baseURL: 'https://' + window.location.hostname.replace('8081', '8080')
+// });
+
 export const ApiClient = axios.create({
-    baseURL: 'https://' + window.location.hostname.replace('8081', '8080')
+    baseURL: 'http://localhost:8080'
 });
 
 export function doUrlEncodedRequest(method, params, url) {
@@ -18,8 +22,8 @@ export function doUrlEncodedRequest(method, params, url) {
     }
 }
 
-export function setAuthorizationHeader(jwt) {
-    AsyncStorage.setItem(storageKey, jwt);
+export async function setAuthorizationHeader(jwt) {
+    await AsyncStorage.setItem(storageKey, jwt);
     ApiClient.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 }
 

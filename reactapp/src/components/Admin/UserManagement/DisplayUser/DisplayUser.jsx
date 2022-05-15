@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './DisplayUser.css';
 import Header from '../../../Header/Header';
 import Table from '@mui/material/Table';
@@ -24,8 +24,8 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
+import { fetchUsers, deleteUser } from '../../../../functions/Admin/UserManagement/DisplayUser';
 
 
 
@@ -93,20 +93,9 @@ TablePaginationActions.propTypes = {
 
 function DisplayUser() {
 
-  const users = [
-    {email: "user1@gmail.com", username: 'user1', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user2@gmail.com", username: 'user2', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user3@gmail.com", username: 'user3', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user4@gmail.com", username: 'user4', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user5@gmail.com", username: 'user5', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user6@gmail.com", username: 'user6', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user7@gmail.com", username: 'user7', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user8@gmail.com", username: 'user8', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user9@gmail.com", username: 'user9', mobileNumber: '0123456789', userRole: 'user'},
-    {email: "user10@gmail.com", username: 'user10', mobileNumber: '0123456789', userRole: 'user'},
-  ].sort((a,b) => a.email.split("@")[1].localeCompare(b.email.split("@")[1]));
-
-
+  const [users, setUsers]= useState([])
+  const [userID, setUserID] = useState()
+  const [userChanged, setUserChanged] = useState(false)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
@@ -121,7 +110,6 @@ function DisplayUser() {
     </Typography>
   ];
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
 
@@ -134,8 +122,9 @@ function DisplayUser() {
     setPage(0);
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (userID) => {
     setDeleteModalOpen(true);
+    setUserID(userID)
   };
 
   const handleClose = () => {
@@ -145,6 +134,24 @@ function DisplayUser() {
   const handleEditUser = (user) => {
     navigate('/admin/editUser', {state : {user: user}})
   }
+
+  const handleDeleteUser = () => {
+    deleteUser(userID).then(response => {
+      setUserChanged(!userChanged)
+      setDeleteModalOpen(false)
+    })
+  }
+
+  useEffect(() => {
+    fetchUsers().then((fetchedUsers) => {
+      if (users.length !== fetchedUsers.length) {
+          setUsers(fetchedUsers)
+      }
+      if (users.length === 0) {
+          setUsers(fetchedUsers)
+      }
+    })
+  }, [users, userChanged])
 
   return (
     <div>
@@ -174,7 +181,7 @@ function DisplayUser() {
               ? users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : users
             ).map((row) => (
-              <TableRow key={row.email}>
+              <TableRow key={row.userId}>
                 <TableCell component="th" scope="row">
                   {row.email}
                 </TableCell>
@@ -185,7 +192,7 @@ function DisplayUser() {
                   {row.mobileNumber}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="right">
-                  {row.userRole}
+                  {row.role}
                 </TableCell>
                 <TableCell style={{ width: 50 }} align="right">
                   <IconButton aria-label="edit" onClick={() => handleEditUser(row)}>
@@ -194,7 +201,7 @@ function DisplayUser() {
                   </IconButton>
                 </TableCell>
                 <TableCell style={{ width: 50 }} align="right">
-                  <IconButton aria-label="delete" color="error" onClick={handleClickOpen}>
+                  <IconButton aria-label="delete" color="error" onClick={() => handleClickOpen(row.userId)}>
                     {/* <DeleteIcon sx={{fontSize: '20px'}}/> */}
                     <span className="material-icons">delete</span>
                   </IconButton>
@@ -231,7 +238,6 @@ function DisplayUser() {
         </Table>
       </TableContainer>
 
-
       <Dialog
         open={deleteModalOpen}
         onClose={handleClose}
@@ -247,7 +253,7 @@ function DisplayUser() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">Yes</Button>
+          <Button onClick={() => handleDeleteUser()} color="primary">Yes</Button>
           <Button onClick={handleClose} color="success" autoFocus>
             Cancel
           </Button>
