@@ -1,10 +1,10 @@
-package com.examly.springapp.serviceLayer;
+package com.examly.springapp.service;
 
 import java.util.ArrayList;
 import java.util.Base64;
 
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.repositoryLayer.UserRepository;
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -26,7 +26,6 @@ public class MyUserDetailsService implements UserDetailsService {
         
         byte[] decodedBytes = Base64.getDecoder().decode(userModel.getPassword());
         String decodedPassword = new String(decodedBytes);
-        int userID = userModel.getUserId();
 
         return new User(userModel.getEmail(),decodedPassword, new ArrayList<>());
     }

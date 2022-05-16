@@ -1,8 +1,8 @@
-package com.examly.springapp.controllerLayer;
+package com.examly.springapp.controller;
 
-import com.examly.springapp.modelLayer.LoginModel;
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.serviceLayer.UserServices;
+import com.examly.springapp.model.LoginModel;
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.service.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.examly.springapp.jwtUtil.JwtUtil;
-import com.examly.springapp.modelLayer.AuthenticationResponse;
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.repositoryLayer.UserRepository;
+import com.examly.springapp.model.AuthenticationResponse;
+import com.examly.springapp.repository.UserRepository;
 
 @RestController
 public class AuthController {
@@ -60,8 +59,11 @@ public class AuthController {
 
     @PostMapping(value="/admin/signup")
     public boolean addAdmin(@RequestBody UserModel user){
-        if((user.getEmail().equals("admin")) && (user.getPassword().equals("admin"))){
-            user.setRole("admin");
+
+        final String ADMIN = "admin";
+
+        if((user.getEmail().equals(ADMIN)) && (user.getPassword().equals(ADMIN))){
+            user.setRole(ADMIN);
             return userServices.saveUser(user);
         }    
         return false;          
@@ -69,8 +71,10 @@ public class AuthController {
 
     @PostMapping(value="/organizer/signup")
     public boolean addOrganizer(@RequestBody UserModel user){
-        if((user.getEmail().equals("organizer")) && (user.getPassword().equals("organizer"))){
-            user.setRole("organizer");
+
+        final String ORGANIZER = "organizer";
+        if((user.getEmail().equals(ORGANIZER)) && (user.getPassword().equals(ORGANIZER))){
+            user.setRole(ORGANIZER);
             return userServices.saveUser(user);
         }
         return false;

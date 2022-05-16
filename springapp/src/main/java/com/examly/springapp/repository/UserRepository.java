@@ -1,6 +1,6 @@
-package com.examly.springapp.repositoryLayer;
+package com.examly.springapp.repository;
 
-import com.examly.springapp.modelLayer.UserModel;
+import com.examly.springapp.model.UserModel;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

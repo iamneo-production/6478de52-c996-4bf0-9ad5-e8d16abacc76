@@ -13,10 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.examly.springapp.modelLayer.RoleModel;
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.modelLayer.JwtPayloadModel;
-import com.examly.springapp.repositoryLayer.UserRepository;
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.model.JwtPayloadModel;
+import com.examly.springapp.repository.UserRepository;
 
 @Service
 public class JwtUtil {

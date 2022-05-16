@@ -1,12 +1,12 @@
-package com.examly.springapp.serviceLayer;
+package com.examly.springapp.service;
 
 import java.util.Base64;
 import java.util.List;
 
-import com.examly.springapp.modelLayer.LoginModel;
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.repositoryLayer.LoginRepository;
-import com.examly.springapp.repositoryLayer.UserRepository;
+import com.examly.springapp.model.LoginModel;
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.repository.LoginRepository;
+import com.examly.springapp.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

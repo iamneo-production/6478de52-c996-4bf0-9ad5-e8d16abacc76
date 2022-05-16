@@ -1,4 +1,4 @@
-package com.examly.springapp.modelLayer;
+package com.examly.springapp.model;
 
 public class RoleModel {
     

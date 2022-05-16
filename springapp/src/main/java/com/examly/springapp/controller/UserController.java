@@ -1,11 +1,11 @@
-package com.examly.springapp.controllerLayer;
+package com.examly.springapp.controller;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.serviceLayer.UserServices;
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.service.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
