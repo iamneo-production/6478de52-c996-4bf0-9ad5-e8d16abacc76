@@ -1,6 +1,6 @@
 package com.examly.springapp.security;
 
-import com.examly.springapp.jwtUtil.JwtRequestFilter;
+import com.examly.springapp.jwtutil.JwtRequestFilter;
 import com.examly.springapp.service.MyUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;

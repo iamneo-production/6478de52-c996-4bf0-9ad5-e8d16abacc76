@@ -1,4 +1,4 @@
-package com.examly.springapp.jwtUtil;
+package com.examly.springapp.jwtutil;
 
 import java.io.IOException;
 

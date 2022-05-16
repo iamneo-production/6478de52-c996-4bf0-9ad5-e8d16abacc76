@@ -15,7 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.examly.springapp.jwtUtil.JwtUtil;
+import com.examly.springapp.jwtutil.JwtUtil;
 import com.examly.springapp.model.AuthenticationResponse;
 import com.examly.springapp.repository.UserRepository;
 
