@@ -1,4 +1,4 @@
-package com.examly.springapp.model;
+package com.examly.springapp.modelLayer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

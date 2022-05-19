@@ -1,4 +1,4 @@
-package com.examly.springapp.model;
+package com.examly.springapp.modelLayer;
 
 public class AuthenticationResponse {
     
@@ -23,5 +23,4 @@ public class AuthenticationResponse {
     public String getJwt() {
         return jwt;
     }
-
 }

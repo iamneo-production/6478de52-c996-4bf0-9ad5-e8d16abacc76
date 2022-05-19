@@ -1,4 +1,4 @@
-package com.examly.springapp.model;
+package com.examly.springapp.modelLayer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="user")
 public class UserModel {
@@ -14,19 +15,21 @@ public class UserModel {
     @Column(name="userId")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
+
     @Column(name="email")
     private String email;
+
     @Column(name="password")
     private String password;
+
     @Column(name="username")
     private String username;
+
     @Column(name="mobileNumber")
     private String mobileNumber;
+
     @Column(name="role")
     private String role = "user";
-
-    public UserModel() {
-    }
 
     public UserModel(String email, String username, String mobileNumber, String role) {
         this.email = email;
@@ -35,10 +38,12 @@ public class UserModel {
         this.role = role;
     }
 
+    public UserModel() {
+    }
+
     public int getUserId() {
         return userId;
     }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -72,4 +77,6 @@ public class UserModel {
     public void setRole(String role) {
         this.role = role;
     }
+
+    
 }

@@ -1,15 +1,14 @@
-package com.examly.springapp.controller;
+package com.examly.springapp.controllerLayer;
 
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.examly.springapp.model.UserModel;
-import com.examly.springapp.service.UserServices;
+import com.examly.springapp.modelLayer.UserModel;
+import com.examly.springapp.serviceLayer.UserServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ public class UserController {
     @Autowired
     private UserServices userServices;
 
-    @CrossOrigin
     @GetMapping(value="/user")
     public List<UserModel> getUser(){
         return userServices.getAllUsers();

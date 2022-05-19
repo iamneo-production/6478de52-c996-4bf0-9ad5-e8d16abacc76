@@ -1,10 +1,10 @@
-package com.examly.springapp.service;
+package com.examly.springapp.serviceLayer;
 
 import java.util.ArrayList;
 import java.util.Base64;
 
-import com.examly.springapp.model.UserModel;
-import com.examly.springapp.repository.UserRepository;
+import com.examly.springapp.modelLayer.UserModel;
+import com.examly.springapp.repositoryLayer.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

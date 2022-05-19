@@ -1,4 +1,4 @@
-package com.examly.springapp.model;
+package com.examly.springapp.modelLayer;
 
 public class RoleModel {
     
@@ -18,4 +18,6 @@ public class RoleModel {
     public RoleModel(String role) {
         this.role = role;
     }
+
+    
 }
