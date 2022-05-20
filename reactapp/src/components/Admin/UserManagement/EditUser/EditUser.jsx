@@ -44,7 +44,7 @@ function EditUser() {
   }
 
   const handleEditUser = () => {
-    editUser(values, jwt).then((res) => {
+    editUser(values).then((res) => {
       navigate('/admin/displayUsers')
     })
   }

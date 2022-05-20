@@ -1,7 +1,14 @@
 import { ApiClient } from '../../Utils/ApiClient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+var jwt
 
-async function editUser(userDetails, jwt) {
+async function editUser(userDetails) {
+    
+    await AsyncStorage.getItem('jwt').then(response => {
+        jwt = response
+    })
+
     const data = {
         email : userDetails.email,
         username: userDetails.username,

@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.examly.springapp.modelLayer.RoleModel;
 import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.modelLayer.JwtPayloadModel;
 import com.examly.springapp.repositoryLayer.UserRepository;
 
 @Service
@@ -47,9 +47,9 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         UserModel userModel = userRepository.findByEmail(userDetails.getUsername());
-        JwtPayloadModel jwtPayloadModel = new JwtPayloadModel(userModel.getRole(), userModel.getUserId());
+        RoleModel roleModel = new RoleModel(userModel.getRole());
         Map<String, Object> claims = new HashMap<>();
-        claims.put("user", jwtPayloadModel);
+        claims.put("access", roleModel);
         return createToken(claims, userDetails.getUsername());
     }
 

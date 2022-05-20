@@ -12,6 +12,7 @@ async function validateUser(email, password) {
 
     await ApiClient.post('/login', data)
     .then(response => {
+        console.log(response.data)
         if(response.data){
             res = {
                 status: true,

@@ -34,6 +34,7 @@ function Login() {
       }, 3000);
     }else{
       const res = await validateUser(values.username, values.password)
+      console.log(res)
       if(res.status){
         dispatch({
           type: actionTypes.SET_USER,

@@ -23,6 +23,7 @@ export function doUrlEncodedRequest(method, params, url) {
 }
 
 export async function setAuthorizationHeader(jwt) {
+    console.log("Setting JWT")
     await AsyncStorage.setItem(storageKey, jwt);
     ApiClient.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 }

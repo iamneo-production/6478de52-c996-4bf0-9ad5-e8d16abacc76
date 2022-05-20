@@ -18,6 +18,7 @@ const reducer = (state, action) => {
                 userType: action.userType,
             };
         case actionTypes.SET_JWT:
+            console.log(action.jwt);
             return {
                 ...state, 
                 jwt: action.jwt,
