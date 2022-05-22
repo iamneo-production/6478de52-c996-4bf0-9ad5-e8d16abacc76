@@ -11,7 +11,9 @@ import EditUser from './components/Admin/UserManagement/EditUser/EditUser';
 import DisplayEvents from './components/User/DisplayEvents/DisplayEvents';
 import BookEvent from './components/User/BookEvent/BookEvent';
 import CreateEvent from './components/Organizer/CreateEvent/CreateEvent';
-
+import AddVenue from "./components/Admin/VenueManagement/AddVenue/AddVenue";
+import EditVenue from "./components/Admin/VenueManagement/EditVenue/EditVenue";
+import ViewVenue from "./components/Admin/VenueManagement/ViewVenue/ViewVenue";
 
 function App() {
   const [{user, userType}, dispatch] = useStateValue();
@@ -68,6 +70,9 @@ function App() {
                     <Route exact path = "/admin/editUser" element={<EditUser />}/>
                     <Route exact path = "/admin" element={<Navigate replace to="/admin/displayUsers"/>}/>
                     <Route exact path = "/" element={<Navigate replace to="/admin/displayUsers"/>}/>
+                    <Route exact path = "/admin/addVenue" element={<AddVenue/>}/>
+                  <Route exact path = "/admin/viewVenue" element={<ViewVenue/>}/>
+                  <Route exact path = "/admin/editVenue" element={<EditVenue/>}/>
                   </Routes>
                 </>
               )
