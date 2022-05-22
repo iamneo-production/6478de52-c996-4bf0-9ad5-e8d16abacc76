@@ -12,7 +12,6 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import { validateUser } from '../../../functions/Auth/Login';
 import Alert from '@mui/material/Alert';
-import { setAuthorizationHeader } from '../../../functions/Utils/ApiClient';
 
 function Login() {
 
@@ -34,18 +33,12 @@ function Login() {
       }, 3000);
     }else{
       const res = await validateUser(values.username, values.password)
-      console.log(res)
       if(res.status){
         dispatch({
           type: actionTypes.SET_USER,
           user: res.userID,
           userType : res.userRole
         });
-        dispatch({
-          type: actionTypes.SET_JWT,
-          jwt: res.jwt
-        });
-        setAuthorizationHeader(res.jwt)
         setTimeout(() => {
           res.userRole === 'admin' ? navigate('/admin') : res.userRole === 'organizer' ? navigate('/organizer') : navigate('/user')
         }, 1000)

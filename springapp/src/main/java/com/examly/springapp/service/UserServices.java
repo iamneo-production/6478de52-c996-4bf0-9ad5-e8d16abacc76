@@ -1,22 +1,20 @@
-package com.examly.springapp.serviceLayer;
+package com.examly.springapp.service;
 
 import java.util.Base64;
 import java.util.List;
 
-import com.examly.springapp.modelLayer.LoginModel;
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.repositoryLayer.LoginRepository;
-import com.examly.springapp.repositoryLayer.UserRepository;
+import com.examly.springapp.model.LoginModel;
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.repository.LoginRepository;
+import com.examly.springapp.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServices {
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private LoginRepository loginRepository;
 
@@ -25,15 +23,15 @@ public class UserServices {
         String password = user.getPassword();
         String encodedString = Base64.getEncoder().encodeToString(password.getBytes());
         user.setPassword(encodedString);
-		String username = user.getUsername();
-			if(!userRepository.existsByEmail(email) && !userRepository.existsByUsername(username)){
-				userRepository.save(user);
-                LoginModel login = new LoginModel(email,password);
-				loginRepository.save(login);
-				return true;
-			}
-			return false;	
-	}
+        String username = user.getUsername();
+        if(!userRepository.existsByEmail(email) && !userRepository.existsByUsername(username)){
+            userRepository.save(user);
+            LoginModel login = new LoginModel(email,password);
+            loginRepository.save(login);
+            return true;
+        }
+        return false;
+    }
 
     public List<UserModel> getAllUsers() {
         return (List<UserModel>) userRepository.findAll();
@@ -42,7 +40,6 @@ public class UserServices {
     public void editSave(UserModel user, int userId) {
         UserModel um = userRepository.findByUserId(userId);
         um.setEmail(user.getEmail());
-        um.setPassword(user.getPassword());
         um.setUsername(user.getUsername());
         um.setMobileNumber(user.getMobileNumber());
         um.setRole(user.getRole());
@@ -54,12 +51,6 @@ public class UserServices {
         if(user.getRole().equals("user")){
             userRepository.deleteByUserId(userId);
         }
-        
     }
-
-    
-
-    
-
-    
 }
+

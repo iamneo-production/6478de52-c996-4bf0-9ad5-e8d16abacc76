@@ -6,7 +6,13 @@ function validateFields(values){
         error: ''
     };
     
-    let emailRegex = values.email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    let emailRegex 
+    if (values.email !== "admin"){
+        emailRegex = values.email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    }else{
+        emailRegex = true
+    }
+
     let phnRegex = values.mobileno.match(/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/);
     if(!emailRegex){
         res.error = "Invalid Email"
@@ -34,12 +40,14 @@ async function saveUser(details){
         mobileNumber: details.mobileno
     }
 
-    await ApiClient.post('/user/signup', data)
-        .then(response => {
+    await ApiClient.post(data.email === "admin" ? '/admin/signup' : '/user/signup' , data)
+    .then(response => {
         if (response.data) {
             return response.data
         }
     });
+
+    
 }
 
 export { validateFields, saveUser }

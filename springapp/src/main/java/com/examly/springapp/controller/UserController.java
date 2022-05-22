@@ -1,14 +1,10 @@
-package com.examly.springapp.controllerLayer;
+package com.examly.springapp.controller;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
-import com.examly.springapp.modelLayer.UserModel;
-import com.examly.springapp.serviceLayer.UserServices;
-
+import com.examly.springapp.model.UserModel;
+import com.examly.springapp.service.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +20,7 @@ public class UserController {
     @GetMapping(value="/user")
     public List<UserModel> getUser(){
         return userServices.getAllUsers();
-    } 
+    }
 
     @PostMapping(value="/user/edit/{userId}")
     public void editUser(@RequestBody UserModel user, @PathVariable int userId){
@@ -32,9 +28,9 @@ public class UserController {
     }
 
     @Transactional
-    @DeleteMapping(value="/user/delete/{userId}")
+    @PostMapping(value="/user/delete/{userId}")
     public void deleteUser(@PathVariable int userId) {
         userServices.deleteSave(userId);
     }
-    
+
 }

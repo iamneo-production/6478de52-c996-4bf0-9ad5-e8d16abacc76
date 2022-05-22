@@ -21,23 +21,30 @@ function Signup() {
   let navigate = useNavigate();
 
   const performSignup = async () => {
-    if(values.email === '' || values.username ==='' || values.mobileno === '' || values.password === '' || values.cpassword === ''){
-      setValues({...values, showError: true, errorMsg:"Required Fields Missing"})
+    if(values.password !== values.cpassword){
+      setValues({...values, showError: true, errorMsg:"Passwords Do Not Match"})
       setTimeout(() => {
         setValues({...values, showError: false, errorMsg: ''})
       }, 3000);
     }else{
-      const res = validateFields(values)
-      if(res.status){
-        setValues({...values, showError: true, errorMsg:res.error})
+
+      if(values.email === '' || values.username ==='' || values.mobileno === '' || values.password === '' || values.cpassword === ''){
+        setValues({...values, showError: true, errorMsg:"Required Fields Missing"})
         setTimeout(() => {
           setValues({...values, showError: false, errorMsg: ''})
         }, 3000);
       }else{
-        saveUser(values)
-        saveUser(values).then(res=> {
-          navigate('/')
-        })
+        const res = validateFields(values)
+        if(res.status){
+          setValues({...values, showError: true, errorMsg:res.error})
+          setTimeout(() => {
+            setValues({...values, showError: false, errorMsg: ''})
+          }, 3000);
+        }else{
+          saveUser(values).then(res=> {
+            navigate('/')
+          })
+        }
       }
     }
   }
