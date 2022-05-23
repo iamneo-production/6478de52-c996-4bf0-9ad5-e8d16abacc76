@@ -1,4 +1,4 @@
-import { Alert, Avatar, Breadcrumbs, Button, Link, TextField, Typography } from '@mui/material';
+import { Alert, Avatar, Breadcrumbs, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link, TextField, Typography } from '@mui/material';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
@@ -8,6 +8,7 @@ import { editVenue } from '../../../../functions/Admin/VenueManagement/EditVenue
 export default function EditVenue() {
   const stater = useLocation();
   const [venue, setVenue] = useState((stater.state.user));
+  const [deleteModalOpen, setDeleteModalOpen] =useState(false);
   const [error, setError] = useState({
     errorMsg: '',
     showError: false
@@ -15,25 +16,10 @@ export default function EditVenue() {
   let navigate = useNavigate();
   const onEditVenue = () => {
     if (venue.venueId !== '' && venue.venueImageUrl !== '' && venue.venueName !== '' && venue.venueCapacity !== '' && venue.venueDescription !== '' && venue.venueLocation !== '') {
-      if (window.confirm("Press OK to Change") === true) 
-      {
-        // var m = JSON.parse(localStorage.getItem("venue"));
-        // console.log(m[0].venueId === venue.venueId)
-        // for (var i = 0; i < m.length; i++) {
-        //   if (m[i].venueId === venue.venueId) {
-        //     m[i].venueName = venue.venueName;
-        //     m[i].venueImageUrl = venue.venueImageUrl;
-        //     m[i].venueDescription = venue.venueDescription;
-        //     m[i].venueLocation = venue.venueLocation;
-        //     m[i].venueCapacity = venue.venueCapacity;
-        //   }
-        // }
-        // localStorage.setItem("venue", JSON.stringify(m));
+     
         editVenue(venue).then((res) => {
           navigate('/admin/viewVenue');
         })
-        // navigate('/admin/viewVenue');
-      }
     }
     else {
       setError({ ...error, showError: true, errorMsg: "Required Fields Missing" })
@@ -42,6 +28,13 @@ export default function EditVenue() {
       }, 3000);
     }
   }
+  const handleOpen = () => {
+    setDeleteModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setDeleteModalOpen(false);
+  };
   const breadcrumbs = [
     <Typography key="1" color="inherit">
       Admin
@@ -50,7 +43,7 @@ export default function EditVenue() {
       key="2"
       color="inherit"
       underline="hover"
-      onClick={()=>{ navigate("/admin/viewVenue")}}
+      onClick={() => { navigate("/admin/viewVenue") }}
     >
       Venues
     </Link>,
@@ -80,24 +73,45 @@ export default function EditVenue() {
           )
         }
         <div className="EditVenue-Title">
-            <h1>Venue Details</h1>
-          </div>
-        <TextField error = {error.showError} type="text" className='EditVenue-Input' id="venueName" label="Enter Venue name" value={venue.venueName}
+          <h1>Venue Details</h1>
+        </div>
+        <TextField error={error.showError} type="text" className='EditVenue-Input' id="venueName" label="Enter Venue name" value={venue.venueName}
           onChange={(e) => { setVenue({ ...venue, venueName: e.target.value }); }} variant="standard" required />
-        <TextField error = {error.showError} type="text" className='EditVenue-Input' id="capacityOfVenue" label="Enter the capacity of the venue" value={venue.venueCapacity}
+        <TextField error={error.showError} type="text" className='EditVenue-Input' id="capacityOfVenue" label="Enter the capacity of the venue" value={venue.venueCapacity}
           onChange={(e) => { setVenue({ ...venue, venueCapacity: e.target.value }); }} variant="standard" required />
 
-        <TextField error = {error.showError} type="text" className='EditVenue-Input' id="imageurl" label="Enter the Venue Image Url" value={venue.venueImageUrl}
+        <TextField error={error.showError} type="text" className='EditVenue-Input' id="imageurl" label="Enter the Venue Image Url" value={venue.venueImageUrl}
           onChange={(e) => { setVenue({ ...venue, venueImageUrl: e.target.value }); }} variant="standard" required />
-        <TextField error = {error.showError} type="text" className='EditVenue-Input' id="venueLocation" label="Enter Venue Location" value={venue.venueLocation}
+        <TextField error={error.showError} type="text" className='EditVenue-Input' id="venueLocation" label="Enter Venue Location" value={venue.venueLocation}
           onChange={(e) => { setVenue({ ...venue, venueLocation: e.target.value }); }} variant="standard" required />
 
-        <TextField error = {error.showError} type="text" className='EditVenue-Input' minRows={3} multiline id="venueDescription" label="Enter the Venue Description" value={venue.venueDescription}
+        <TextField error={error.showError} type="text" className='EditVenue-Input' minRows={3} multiline id="venueDescription" label="Enter the Venue Description" value={venue.venueDescription}
           onChange={(e) => { setVenue({ ...venue, venueDescription: e.target.value }); }} variant="standard" required />
         <div className="EditVenue-ButtonWrapper">
-          <Button variant="contained" className="EditVenue-Button" id="editVenue" onClick={() => { onEditVenue(); }}>Update</Button>
+          <Button variant="contained" className="EditVenue-Button" id="editVenue" onClick={()=>{handleOpen();}}>Update</Button>
         </div>
       </div>
+      <Dialog
+        open={deleteModalOpen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Edit Venue"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure to change this?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={()=> {onEditVenue();}} color="primary">Yes</Button>
+          <Button onClick={handleClose} color="success" autoFocus>
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   )
 }
