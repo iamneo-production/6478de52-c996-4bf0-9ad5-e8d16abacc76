@@ -4,6 +4,7 @@ import "./AddVenue.css";
 import Header from '../../../Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { addVenue } from '../../../../functions/Admin/VenueManagement/AddVenue';
+
 export default function AddVenue() {
   const [venue, setVenue] = useState({
     venueId: '',
@@ -23,20 +24,27 @@ export default function AddVenue() {
   let navigate = useNavigate();
   const onAddVenue = () => {
     console.log(venue);
-    if (venue.venueImageUrl !== '' && venue.venueName !== '' && venue.venueCapacity !== '' && venue.venueDescription !== '' && venue.venueLocation !== '') {
       addVenue(venue).then((res) => {
         navigate('/admin/viewVenue')
       })
-      console.log(venue);
-    } else {
+  }
+  const handleOpen = () => {
+    if (!(venue.venueImageUrl !== '' && venue.venueName !== '' && venue.venueCapacity !== '' && venue.venueDescription !== '' && venue.venueLocation !== '')) {
       setError({ ...error, showError: true, errorMsg: "Required Fields Missing" })
       setTimeout(() => {
         setError({ ...error, showError: false, errorMsg: '' })
       }, 3000);
     }
-  }
-  const handleOpen = () => {
+    else if(isNaN(venue.venueCapacity))
+    {
+      setError({ ...error, showError: true, errorMsg: "Venue Capacity value must be a number" })
+      setTimeout(() => {
+        setError({ ...error, showError: false, errorMsg: '' })
+      }, 3000);
+    }
+    else{
     setDeleteModalOpen(true);
+    }
   };
 
   const handleClose = () => {
