@@ -3,13 +3,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storageKey = 'jwt';
 
-// export const ApiClient = axios.create({
-//     baseURL: 'https://' + window.location.hostname.replace('8081', '8080')
-// });
-
 export const ApiClient = axios.create({
-    baseURL: 'http://localhost:8080'
+    baseURL: 'https://' + window.location.hostname.replace('8081', '8080')
 });
+
+// export const ApiClient = axios.create({
+//     baseURL: 'http://localhost:8080'
+// });
 
 export function doUrlEncodedRequest(method, params, url) {
     const data = Object.keys(params).map((key) => `${key}=${encodeURIComponent(params[key])}`).join('&');

@@ -9,7 +9,7 @@ async function editVenue(venueDetails) {
         venueLocation: venueDetails.venueLocation,
         venueCapacity: venueDetails.venueCapacity
     }
-    console.log(data);
+    
     await ApiClient.post('/admin/editVenue/'+venueDetails.venueId, data)
     .then(response => {
         if(response.status === 200){

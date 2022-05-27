@@ -24,9 +24,9 @@ export default function AddVenue() {
   let navigate = useNavigate();
   const onAddVenue = () => {
     console.log(venue);
-      addVenue(venue).then((res) => {
-        navigate('/admin/viewVenue')
-      })
+    addVenue(venue).then((res) => {
+      navigate('/admin/viewVenue')
+    })
   }
   const handleOpen = () => {
     if (!(venue.venueImageUrl !== '' && venue.venueName !== '' && venue.venueCapacity !== '' && venue.venueDescription !== '' && venue.venueLocation !== '')) {
@@ -35,15 +35,14 @@ export default function AddVenue() {
         setError({ ...error, showError: false, errorMsg: '' })
       }, 3000);
     }
-    else if(isNaN(venue.venueCapacity))
-    {
+    else if (isNaN(venue.venueCapacity)) {
       setError({ ...error, showError: true, errorMsg: "Venue Capacity value must be a number" })
       setTimeout(() => {
         setError({ ...error, showError: false, errorMsg: '' })
       }, 3000);
     }
-    else{
-    setDeleteModalOpen(true);
+    else {
+      setDeleteModalOpen(true);
     }
   };
 
